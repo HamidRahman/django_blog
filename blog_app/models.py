@@ -5,8 +5,8 @@ from django.utils import timezone
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return (
-            super().get_queryset().filter(status=Post.status.PUBLISHED)
-        )
+        super().get_queryset().filter(status=Post.Status.PUBLISHED)
+    )
 
 class Post(models.Model):
     class Status(models.TextChoices):
@@ -30,7 +30,7 @@ class Post(models.Model):
         default = Status.DRAFT
     )
     objects = models.Manager()
-    published = PublishedManager
+    published = PublishedManager()
     class Meta:
         ordering = ['-publish']
         indexes =  [
